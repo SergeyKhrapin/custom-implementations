@@ -1,5 +1,4 @@
 // 1. Make an object iterable
-
 const obj = {
     start: 1,
     end: 5,
@@ -20,4 +19,28 @@ obj[Symbol.iterator] = function() {
 
 for (let val of obj) {
     console.log(val); // 1, 2, 3, 4, 5
+}
+
+// 2. Make for..of working like for..in :)
+const obj2 = {
+    a: 1,
+    b: 2,
+    c: 3,
+};
+
+obj2[Symbol.iterator] = function() {
+    return {
+        keys: Object.keys(this),
+        i: 0,
+        next() {
+            return {
+                value: this.keys[this.i++],
+                done: this.i > this.keys.length ? true : false,
+            };
+        }
+    };
+}
+
+for (let key of obj2) {
+    console.log(key); // 'a', 'b', 'c' (the same like for..in)
 }
