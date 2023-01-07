@@ -44,3 +44,28 @@ obj2[Symbol.iterator] = function() {
 for (let key of obj2) {
     console.log(key); // 'a', 'b', 'c' (the same like for..in)
 }
+
+// 3. Implement default for..of behaviour
+const obj3 = {
+    a: 100,
+    b: 200,
+    c: 300,
+  };
+
+  obj3[Symbol.iterator] = function() {
+    const keys = Object.keys(this);
+    const _this = this;
+    return {
+      index: 0,
+      next() {
+        return {
+         value: _this[keys[this.index++]],
+         done: this.index === keys.length + 1,
+        }
+      }
+    };
+  }
+
+  for (let val of obj3) {
+     console.log('val', val); // 100, 200, 300
+  }
