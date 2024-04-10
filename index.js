@@ -53,18 +53,17 @@ const obj3 = {
   };
 
   obj3[Symbol.iterator] = function() {
-    const keys = Object.keys(this);
-    const _this = this;
+    const values = Object.values(this);
+    let i = 0;
     return {
-      index: 0,
-      next() {
-        return {
-         value: _this[keys[this.index++]],
-         done: this.index === keys.length + 1,
+        next() {
+            return {
+                value: values[i++],
+                done: i > values.length,
+            };
         }
-      }
     };
-  }
+}
 
   for (let val of obj3) {
      console.log('val', val); // 100, 200, 300
