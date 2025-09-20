@@ -3,3 +3,5 @@
 ## symbol-iterator.js - custom implementation of the iterable protocol
 
 ## rxjs.js - custom implementation of some RxJS library methods (range, pipe, subscribe)
+
+## promisAll.js - custom implementation of Promise.all()
