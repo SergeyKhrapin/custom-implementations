@@ -46,6 +46,8 @@ for (let key of obj2) {
 }
 
 // 3. Implement default for..of behaviour
+
+// a - using custom Symbol.iterator method
 const obj3 = {
     a: 100,
     b: 200,
@@ -66,5 +68,21 @@ const obj3 = {
 }
 
   for (let val of obj3) {
+     console.log('val', val); // 100, 200, 300
+  }
+
+// b - using generator function
+function* gen(obj) {
+    const values = Object.values(obj);
+    let index = 0;
+
+    while (index <= values.length) {
+        yield values[index++]
+    }
+}
+
+const iterableObject = gen(obj3);
+
+for (let val of iterableObject) {
      console.log('val', val); // 100, 200, 300
   }
